@@ -9,8 +9,12 @@ def home():
     author = request.args.get ("author", None)
     post = request.args.get ("post", None)
     if newpost == "Post":
-        text =  title + "<br>" + author + "<br>" + post
-        return render_template ("index.html", posts = text)
+        link =  '/'+ title + ''
+        return render_template ("index.html", 
+                                link = link,
+                                title = title,
+                                author = author,
+                                post = post)
     else:
         return render_template ("index.html", posts = "")
 
