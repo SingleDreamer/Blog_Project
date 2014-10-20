@@ -1,10 +1,21 @@
-<html>
-<head>Blog Project</head>
-<body>
-<form method = "GET">
-  
-  <input type = "submit" name = "new_post" value = "New Post">
-  %s 
-</form>
-</body>
+<!DOCTYPE html>
+<html lang>
+  <head>
+    <title>Anathema</title>
+  </head>
+  <body>
+    <form method = "GET">
+      <h1>Anathema</h1>
+      <input type = "text" name = "title">
+      <br>
+      <input type = "text" name = "author">
+      <br>
+      <input type = "text" name = "post">
+      <br>
+      <input type = "submit" name = "new_post" value = "Post">
+      <br>
+      {{posts}}
+    </form>
+    
+  </body>
 </html>
