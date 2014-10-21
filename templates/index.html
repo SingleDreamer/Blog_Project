@@ -32,6 +32,7 @@
 	<br>
       </form>
     </div>
+    {% if post %}
     <div class="col-lg-8 col-lg-offset-2 panel panel-default">
       <div class="panel-heading">
 	<h3 class="panel-title"> <a href = {{link}}>{{title}}</a> </h3>
@@ -42,16 +43,7 @@
 	{{post}}
       </div>
     </div>
-    <div class="col-lg-8 col-lg-offset-2 panel panel-default">
-      <div class="panel-heading">
-	<h3 class="panel-title"> <a href = {{link}}>{{title}}</a> </h3>
-      </div>
-      <div class="panel-body">
-	<h5>{{author}}</h5>
-	<br>
-	{{post}}
-      </div>
-    </div>
+    {% endif %}
     {% endblock info %}
   </body>
 </html>

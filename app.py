@@ -8,6 +8,7 @@ def home():
     title = request.args.get ("title", None)
     author = request.args.get ("author", None)
     post = request.args.get ("post", None)
+    #make lists and play around with nested loops and loops.index
     if newpost == "Post":
         link =  '/'+ title + ''
         return render_template ("index.html", 
@@ -16,9 +17,10 @@ def home():
                                 author = author,
                                 post = post)
     else:
-        return render_template ("index.html", posts = "")
+        return render_template ("index.html")
 
 @app.route("/<title>")
+##check if title is unique
 def new_post(title):
     return render_template ("post.html", title = title)
     
