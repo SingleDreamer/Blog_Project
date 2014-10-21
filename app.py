@@ -17,7 +17,7 @@ def home():
         link =  '/'+ title + ''
         q = "Insert Into posts Values(rowid," + title + "," + author + "," + post  +");"
         c.execute(q)
-        conn.commit()+
+        conn.commit()
         return render_template ("index.html", 
                                 link = link,
                                 title = title,
