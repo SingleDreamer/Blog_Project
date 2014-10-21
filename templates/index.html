@@ -4,6 +4,8 @@
     <title>Anathema</title>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootswatch/3.2.0/superhero/bootstrap.min.css">
     <link rel="shortcut icon" href="/favicon.ico"> 
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
   </head>
   <body>
     <center>
@@ -12,6 +14,8 @@
       </div>
     </center>
     {% block info %}
+<a onclick="$('#addPost').toggle()"><button class="btn btn-default pull-right">show/hide</button></a>
+<div id="addPost">
     <div class="col-lg-6 col-lg-offset-3">
       <form class="form-horizontal" role="form">
 	<div class="form-group">
@@ -33,6 +37,7 @@
 	<br>
       </form>
     </div>
+</div>
     {% if post %}
     <div class="col-lg-8 col-lg-offset-2 panel panel-default">
       <div class="panel-heading">
