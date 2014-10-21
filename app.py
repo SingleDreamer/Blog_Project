@@ -1,6 +1,10 @@
 from flask import Flask, render_template, request#, redirect, url_for
+import sqlite3
 
 app = Flask(__name__)
+conn = sqlite3.connect("blog.db")
+c=conn.cursor()
+
 
 @app.route("/")
 def home():
@@ -11,6 +15,9 @@ def home():
     #make lists and play around with nested loops and loops.index
     if newpost == "Post":
         link =  '/'+ title + ''
+        q = "Insert Into posts Values(rowid," + title + "," + author + "," + post  +");"
+        c.execute(q)
+        conn.commit()+
         return render_template ("index.html", 
                                 link = link,
                                 title = title,
@@ -22,7 +29,9 @@ def home():
 @app.route("/<title>")
 ##check if title is unique
 def new_post(title):
-    return render_template ("post.html", title = title)
+    author = "select author from posts"
+    post = "select post from posts"
+    return render_template ("post.html", title = title, author = author, post = post)
     
 if __name__ == "__main__":
     app.debug = True
