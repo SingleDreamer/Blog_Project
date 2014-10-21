@@ -19,6 +19,7 @@ def home():
         return render_template ("index.html", posts = "")
 
 @app.route("/<title>")
+##check if title is unique
 def new_post(title):
     return render_template ("post.html", title = title)
     
