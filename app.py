@@ -3,8 +3,10 @@ import sqlite3
 
 app = Flask(__name__)
 conn = sqlite3.connect("blog.db")
-c=conn.cursor()
-
+q = "create table posts(title text)"
+'''c=conn.cursor()
+c.execute(q)
+'''
 
 @app.route("/")
 def home():
@@ -15,9 +17,10 @@ def home():
     #make lists and play around with nested loops and loops.index
     if newpost == "Post":
         link =  '/'+ title + ''
-        q = "Insert Into posts Values(rowid," + title + "," + author + "," + post  +");"
-        c.execute(q)
-        conn.commit()
+
+        #q = "Insert Into posts Values(" + title +");"
+        #c.execute(q)
+        #conn.commit()
         return render_template ("index.html", 
                                 link = link,
                                 title = title,
