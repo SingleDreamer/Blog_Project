@@ -93,8 +93,8 @@ def post(title):
 
     return render_template ("post.html", 
                             title = t, 
-                            author = authorstr[0], 
-                            post = poststr[0],
+                            author = authorstr, 
+                            post = poststr,
                             commentor_list = commentor_list, 
                             comment_list = comment_list)
     
