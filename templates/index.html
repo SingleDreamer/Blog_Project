@@ -46,7 +46,7 @@
     {% for a in title_list %}
     {% if vars.update ({"t":a}) %}
     {% endif %}
-    {% if vars.update ({"l": "/" + vars.t }) %}
+    {% if vars.update ({"l": "/" + vars.t.replace(" ", "+") }) %}
     {% endif %}
     {% set n = loop.index %}
     
@@ -69,7 +69,7 @@
 	<h3 class="panel-title"> <a href = {{vars.l}}>{{vars.t}}</a> </h3>
       </div>
       <div class="panel-body">
-	<h5>{{vars.a}}</h5>
+	<i><h5>{{vars.a}}</h5></i>
 	<br>
 	{{vars.p}}
       </div>

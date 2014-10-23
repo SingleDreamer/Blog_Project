@@ -19,7 +19,7 @@ def home():
     title = request.args.get ("title", None)
     author = request.args.get ("author", None)
     post = request.args.get ("post", None)
-    #make lists and play around with nested loops and loops.index
+
     conn = sqlite3.connect("blog.db")
     c = conn.cursor()
     if newpost == "Post":
@@ -27,9 +27,9 @@ def home():
         c.execute(q)
         #x = x + 1
     #link =  '/'+ title + ''
-    s = "Select post_title From posts"
-    t = "Select post_author From posts"
-    u = "Select post_content From posts"
+    s = "Select title From posts"
+    t = "Select author From posts"
+    u = "Select content From posts"
     title_list = []
     author_list = []
     post_list = []
@@ -52,10 +52,51 @@ def home():
 
 @app.route("/<title>")
 ##check if title is unique
-def new_post(title):
-    author = "select author from posts"
-    post = "select post from posts"
-    return render_template ("post.html", title = title, author = author, post = post)
+def post(title):
+    t = title.replace ("+", " ")
+    nc = request.args.get ("new_comment", None)
+    commentor = request.args.get ("commentor", None)
+    comment = request.args.get ("comment", None)
+    print commentor
+    print comment
+    conn = sqlite3.connect("blog.db")
+    c = conn.cursor()
+    if nc == "Post": 
+        q = "Insert Into comments Values('" + t + "','" + commentor + "','" + comment + "');"
+        c.execute(q)
+        
+
+    commentor_list = []
+    comment_list = []
+    
+    a = "select author from posts where title = '" + t + "'"
+    author = c.execute (a)
+    authorstr = author= [(str(x)[3:])[:-3] for x in author]
+    print authorstr
+    p = "select content from posts where title = '" + t + "'"
+    post = c.execute (p)
+    poststr = [(str(x)[3:])[:-3] for x in post]
+    print poststr
+    
+    x = "select commentor from comments where title == '" + t + "';"        
+    y = "select comment from comments where title == '" + t + "';"
+    
+    commentors = c.execute (x)
+    commentor_list = [(str(x)[3:])[:-3] for x in commentors]
+    comments = c.execute (y)
+    comment_list =  [(str(x)[3:])[:-3] for x in comments]
+    conn.commit()
+
+    print commentor_list
+    print comment_list
+
+
+    return render_template ("post.html", 
+                            title = t, 
+                            author = authorstr[0], 
+                            post = poststr[0],
+                            commentor_list = commentor_list, 
+                            comment_list = comment_list)
     
 if __name__ == "__main__":
     app.debug = True
