@@ -14,8 +14,10 @@
       </div>
     </center>
     {% block info %}
-<center><a onclick="$('#addPost').toggle()"><button class="btn btn-default">New Post</button></a></center>
-<div hidden id="addPost">
+    <center><a onclick="$('#addPost').toggle()"><button class="btn btn-default">New Post</button></a></center>
+    <br>
+    <br>
+    <div hidden id="addPost">
     <div class="col-lg-6 col-lg-offset-3">
       <form class="form-horizontal" role="form">
 	<div class="form-group">
@@ -37,18 +39,42 @@
 	<br>
       </form>
     </div>
-</div>
-    {% if post %}
+    </div>
+
+    {% if title_list %}
+    {% set vars = {"l" : "", "t" : "", "a" : "", "p" : ""} %} 
+    {% for a in title_list %}
+    {% if vars.update ({"t":a}) %}
+    {% endif %}
+    {% if vars.update ({"l": "/" + vars.t }) %}
+    {% endif %}
+    {% set n = loop.index %}
+    
+    {% for b in author_list %}
+    {% if loop.index == n %}
+    {% if vars.update ({"a":b}) %}
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+    
+    {% for c in post_list %}
+    {% if loop.index == n %}
+    {% if vars.update ({"p":c}) %}
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+
     <div class="col-lg-8 col-lg-offset-2 panel panel-default">
       <div class="panel-heading">
-	<h3 class="panel-title"> <a href = {{link}}>{{title}}</a> </h3>
+	<h3 class="panel-title"> <a href = {{vars.l}}>{{vars.t}}</a> </h3>
       </div>
       <div class="panel-body">
-	<h5>{{author}}</h5>
+	<h5>{{vars.a}}</h5>
 	<br>
-	{{post}}
+	{{vars.p}}
       </div>
     </div>
+    {% endfor %}
     {% endif %}
     {% endblock info %}
   </body>
